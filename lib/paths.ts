@@ -1,37 +1,32 @@
-export default function paths() {
+type ID = (string | number)[];
+
+export default function paths(...ids: ID) {
   const defaultPath: string = "/api/v2";
 
-  function setId(id?: string | number): string {
-    return id ? `/${id}` : "";
+  function getPathFromIds(path: string, ids: ID, ...keys: string[]) {
+    return keys.reduce((ph: string, id, i) => {
+      return ph.replace(id, ids[i].toString());
+    }, path).split("/:").shift();
   }
 
   return {
-    movies: (id?: string) => {
-      return defaultPath.concat("movies", setId(id))
+    movies: {
+      get: () => getPathFromIds(defaultPath.concat("movies/:id"), ids, "id")
     },
-    genres: (id?: string) => {
-      const pathGenre = "/genre"
-      return {
-        get: () => defaultPath.concat("genres", setId(id)),
-        toMovie: () => defaultPath.concat(pathGenre, "/to/movie"),
-        removeFromMovie: (genre: number, movie: number) => defaultPath.concat(pathGenre, setId(genre), "/movie", setId(movie))
-      }
+    genres: {
+      get: () => getPathFromIds(defaultPath.concat("genres/:id"), ids, "id"),
+      setToMovie: () => defaultPath.concat("/genre/to/movie"),
+      removeFromMovie: () => getPathFromIds(defaultPath.concat("/genre/:genreId/movie/:movieId"), ids, "genreId", "movieId")
     },
-    casts: (id?: string) => {
-      const pathGenre = "/cast"
-      return {
-        get: () => defaultPath.concat("casts", setId(id)),
-        toMovie: () => defaultPath.concat(pathGenre, "/to/movie"),
-        removeFromMovie: (genre: number, movie: number) => defaultPath.concat(pathGenre, setId(genre), "/movie", setId(movie))
-      }
+    titles: {
+      get: () => getPathFromIds(defaultPath.concat("titles/:id"), ids, "id"),
+      setToMovie: () => defaultPath.concat("/genre/to/movie"),
+      removeFromMovie: () => getPathFromIds(defaultPath.concat("/genre/:genreId/movie/:movieId"), ids, "genreId", "movieId")
     },
-    titles: (id?: string) => {
-      const pathGenre = "/title"
-      return {
-        get: () => defaultPath.concat("titles", setId(id)),
-        toMovie: () => defaultPath.concat(pathGenre, "/to/movie"),
-        removeFromMovie: (genre: number, movie: number) => defaultPath.concat(pathGenre, setId(genre), "/movie", setId(movie))
-      }
-    }
+    casts: {
+      get: () => getPathFromIds(defaultPath.concat("casts/:id"), ids, "id"),
+      setToMovie: () => defaultPath.concat("/cast/to/movie"),
+      removeFromMovie: () => getPathFromIds(defaultPath.concat("/cast/:castId/movie/:movieId"), ids, "castId", "movieId")
+    },
   }
 }
