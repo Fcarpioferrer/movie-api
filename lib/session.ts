@@ -1,22 +1,21 @@
 import {NextApiRequest} from "next";
-import Axios from "axios";
+import Axios, {AxiosResponse} from "axios";
 
-enum METHOD {
+export enum METHOD {
   POST = "POST",
   GET = "GET",
   DELETE = "DELETE",
   PUT = "PUT"
 }
 
-const API_URL = process.env.REACT_APP_API_URL!;
-export default async function handlerRequest(req: NextApiRequest, path = "") {
+export const API_URL = process.env.REACT_APP_API_URL!;
+export default async function handlerRequest(req: NextApiRequest, path = ""): Promise<AxiosResponse> {
 
   const http = Axios.create({
     baseURL: API_URL,
   });
 
-
-  let response;
+  let response: any;
   switch (req.method as METHOD) {
     case METHOD.POST:
       response = await http.post(path, req.body)
@@ -25,13 +24,15 @@ export default async function handlerRequest(req: NextApiRequest, path = "") {
       response = await http.put(path, req.body)
       break;
     case METHOD.GET:
-      response = await http.get(path)
+      response = await http.get(path).then(res => res.data)
       break;
     case METHOD.DELETE:
       response = await http.delete(path)
       break;
+    default:
+      response = new Promise((resolve, reject) => reject({success: false}));
+      break;
   }
 
-
-  return response;
+  return response as AxiosResponse;
 }

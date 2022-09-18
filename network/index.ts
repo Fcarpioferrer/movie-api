@@ -1,7 +1,9 @@
 import Axios, {AxiosResponse} from 'axios';
 import {Response} from "../types/Response";
 
-const http = Axios.create({});
+const http = Axios.create({
+  baseURL: "http://localhost:3000"
+});
 
 http.interceptors.response.use(function (response: AxiosResponse) {
   return response;
@@ -11,10 +13,11 @@ http.interceptors.response.use(function (response: AxiosResponse) {
 
 
 export function get(url: string, params?: any): Promise<Response> {
-  return http.get(url, {params}).then(res => res.data)
-    .catch((err) => {
-      return Promise.resolve({success: false})
-    });
+  return http.get(url, {params}).then(res => {
+    return res?.data;
+  }).catch((err) => {
+    return Promise.resolve({success: false})
+  });
 }
 
 export function post(url: string, params?: any): Promise<Response> {
