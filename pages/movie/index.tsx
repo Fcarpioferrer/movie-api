@@ -1,19 +1,16 @@
 import MovieComponent from "../../components/movie/MovieComponent";
+import {useEffect} from "react";
+import {movieActions} from "../../store/movie/reducer";
+import {useDispatch} from "react-redux";
 
-const Movie = () => <MovieComponent/>;
+const Movie = () => {
+  const dispatch = useDispatch();
 
-/*export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({req}) => {
+  useEffect(() => {
+    dispatch(movieActions.getAll())
+  }, [dispatch])
 
-      await store.dispatch(movieActions.getAll());
-      store.dispatch(END);
-      await store.movieTask?.toPromise();
-      return {
-        props: {},
-      };
-    }
-);*/
-
+  return <MovieComponent/>
+};
 
 export default Movie;

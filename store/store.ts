@@ -1,40 +1,34 @@
 import {combineReducers, configureStore, getDefaultMiddleware, Store} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga';
 import movieReducer from "./movie/reducer";
-import movieSagas from "./movie/saga";
-import {createWrapper, HYDRATE} from "next-redux-wrapper";
+import {createWrapper} from "next-redux-wrapper";
 import {Task} from "@redux-saga/types";
-import thunk from "redux-thunk";
+import {createLogger} from 'redux-logger'
+import movieSagas from "./movie/saga";
 
 export interface SagaStore extends Store {
   movieTask?: Task;
 }
 
-const combinedReducer = combineReducers({movieReducer});
+const reducer = combineReducers({movieReducer});
+export type RootState = ReturnType<typeof reducer>;
+
+const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
-const middleware = [thunk, ...getDefaultMiddleware(), sagaMiddleware];
-export type RootState = ReturnType<typeof combinedReducer>;
 
-const reducer = (state: any, action: any) => {
 
-  if (action.type === HYDRATE) {
-    return {...state, ...action.data};
-  }
+const middleware = [...getDefaultMiddleware(), sagaMiddleware, logger];
 
-  return combinedReducer(state, action);
-};
-
-export const makeStore = () => {
+const makeStore: any = () => {
   const store = configureStore({
     reducer,
     middleware,
-    devTools: true
+    devTools: Boolean(process.env.DEV_TOOLS)
   });
+  (store as any).movieTask = sagaMiddleware.run(movieSagas);
+  return store;
 
-  (store as SagaStore).movieTask = sagaMiddleware.run(movieSagas);
-
-  return store as SagaStore;
-};
+}
 
 
 export const wrapper = createWrapper<SagaStore>(makeStore)
