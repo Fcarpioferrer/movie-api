@@ -11,6 +11,7 @@ export class States {
   delete: State = State.IDLE;
   get: State = State.IDLE;
   create: State = State.IDLE;
+  other: State = State.IDLE;
 
   toJson?: any = () => {
     return {
@@ -19,6 +20,7 @@ export class States {
       delete: State.IDLE,
       get: State.IDLE,
       create: State.IDLE,
+      other: State.IDLE,
     }
   }
 }
