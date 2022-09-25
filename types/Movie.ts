@@ -6,7 +6,7 @@ export class Movie {
   name: string = "";
   description: string = "";
   image: string = "";
-  starts: number = 0;
+  stars: number = 0;
   year: number = 0;
   id!: number;
 }
