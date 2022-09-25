@@ -24,7 +24,7 @@ const LoadingComponent = ({children, state}: IProps) => {
         </div>
       );
 
-    case State.FINISHED:
+    default:
       return (
         <>
           {children}
