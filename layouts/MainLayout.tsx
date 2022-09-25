@@ -5,7 +5,7 @@ import {Container} from "reactstrap";
 
 const MainLayout = (props: PropsChildren) => {
   return (
-    <Container className="vh-100" fluid>
+    <Container className="vh-100">
       {props.children}
     </Container>
   )
