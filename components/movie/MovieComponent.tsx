@@ -5,7 +5,7 @@ import {useEffect} from "react";
 import {State} from "../../types/reducer/State";
 import {movieActions} from "../../store/movie/reducer";
 import {Row} from "reactstrap";
-import MovieItem from "../shared/MovieItem";
+import MovieItem from "./MovieItem";
 
 const MovieComponent = () => {
 
