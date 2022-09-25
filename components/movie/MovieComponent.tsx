@@ -55,7 +55,8 @@ const MovieComponent = () => {
               className="bg-white">
               <div className="center-content">
                 {prev && <img className="shadow-lg rounded" width={"25%"} src={prev} alt={item.name}/>}
-                <img className="shadow-lg rounded mx-3 cursor-pointer" width={"33%"} src={item.image} alt={item.name}/>
+                <img className="shadow-lg rounded mx-3 pulse-effects cursor-pointer" width={"33%"} src={item.image}
+                     alt={item.name}/>
                 {next && <img className="shadow rounded" width={"25%"} src={next} alt={item.name}/>}
               </div>
               <CarouselCaption
