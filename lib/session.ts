@@ -24,7 +24,7 @@ export default async function handlerRequest(req: NextApiRequest, path = ""): Pr
       response = await http.put(path, req.body)
       break;
     case METHOD.GET:
-      response = await http.get(path).then(res => res.data)
+      response = await http.get(path);
       break;
     case METHOD.DELETE:
       response = await http.delete(path)
@@ -34,5 +34,5 @@ export default async function handlerRequest(req: NextApiRequest, path = ""): Pr
       break;
   }
 
-  return response as AxiosResponse;
+  return (response as AxiosResponse).data;
 }

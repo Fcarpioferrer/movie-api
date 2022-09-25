@@ -37,38 +37,40 @@ const MovieComponent = () => {
 
   return (
     <LoadingComponent state={getAll}>
-      <Carousel
-        interval={10000}
-        className="h-75 mt-5"
-        activeIndex={activeIndex}
-        next={next}
-        previous={previous}
-      >
-        {list.map((item, i) => {
-          const prev = list[i - 1]?.image ?? list[list.length - 1].image;
-          const next = list[i + 1]?.image ?? list[0].image;
-          return (
-            <CarouselItem
-              onExiting={onExiting}
-              onExited={onExited}
-              key={item.id}
-              className="bg-white">
-              <div className="center-content">
-                {prev && <img className="shadow-lg rounded" width={"25%"} src={prev} alt={item.name}/>}
-                <img className="shadow-lg rounded mx-3 pulse-effects cursor-pointer" width={"33%"} src={item.image}
-                     alt={item.name}/>
-                {next && <img className="shadow rounded" width={"25%"} src={next} alt={item.name}/>}
-              </div>
-              <CarouselCaption
-                className="bg-dark rounded p-2"
-                captionText={item.description}
-                captionHeader={item.name}/>
-            </CarouselItem>
-          );
-        })}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous}/>
-        <CarouselControl direction="next" directionText="Next" onClickHandler={next}/>
-      </Carousel>
+      <div className="h-50">
+        <Carousel
+          interval={10000}
+          className="mt-5"
+          activeIndex={activeIndex}
+          next={next}
+          previous={previous}
+        >
+          {list.map((item, i) => {
+            const prev = list[i - 1]?.image ?? list[list.length - 1].image;
+            const next = list[i + 1]?.image ?? list[0].image;
+            return (
+              <CarouselItem
+                onExiting={onExiting}
+                onExited={onExited}
+                key={item.id}
+                className="bg-white">
+                <div className="center-content">
+                  {prev && <img className="shadow-lg rounded" width={"25%"} src={prev} alt={item.name}/>}
+                  <img className="shadow-lg rounded mx-3 pulse-effects cursor-pointer" width={"28%"} src={item.image}
+                       alt={item.name}/>
+                  {next && <img className="shadow rounded" width={"25%"} src={next} alt={item.name}/>}
+                </div>
+                <CarouselCaption
+                  className="bg-dark rounded p-2"
+                  captionText={item.description}
+                  captionHeader={item.name}/>
+              </CarouselItem>
+            );
+          })}
+          <CarouselControl  direction="prev" directionText="Previous" onClickHandler={previous}/>
+          <CarouselControl direction="next" directionText="Next" onClickHandler={next}/>
+        </Carousel>
+      </div>
     </LoadingComponent>
   )
 }

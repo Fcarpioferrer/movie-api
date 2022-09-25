@@ -22,7 +22,7 @@ export class States {
   create: State = State.IDLE;
   other: State = State.IDLE;
 
-  toJson?: any = () => {
+  toJson?: Function = () => {
     return {
       getAll: State.IDLE,
       update: State.IDLE,
