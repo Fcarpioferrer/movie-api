@@ -5,6 +5,15 @@ export enum State {
   IDLE = "IDLE"
 }
 
+export enum StateType {
+  GET_ALL = "getAll",
+  GET = "get",
+  CREATE = "create",
+  DELETE = "delete",
+  UPDATE = "update",
+  OTHER = "other",
+}
+
 export class States {
   getAll: State = State.IDLE;
   update: State = State.IDLE;
@@ -25,5 +34,4 @@ export class States {
   }
 }
 
-export type statesType = "getAll" | "delete" | "update" | "get" | "create";
 

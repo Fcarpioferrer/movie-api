@@ -1,9 +1,9 @@
 import {States} from "../../types/reducer/State";
-import {Movie} from "../../types/Movie";
+import {MovieResult} from "../../types/Movie";
 
 export interface MovieState {
   states: States,
-  list: Movie[]
+  list: MovieResult[]
 }
 
 export enum ACTIONS_MOVIE {

@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ReducerNames} from "../../types/reducer/ReducerNames";
 import {MovieState} from "./types";
-import {State, States, statesType} from "../../types/reducer/State";
-import {Movie} from "../../types/Movie";
+import {State, States, StateType} from "../../types/reducer/State";
+import {MovieResult} from "../../types/Movie";
 
 
 const initialState: MovieState = {
@@ -16,11 +16,11 @@ const slice = createSlice({
   reducers: {
     getAll: () => {
     },
-    setAll: (state, action: PayloadAction<Movie[]>) => {
+    setAll: (state, action: PayloadAction<MovieResult[]>) => {
       state.list = action.payload;
       state.states.getAll = State.FINISHED;
     },
-    changeStates: (state, action: PayloadAction<{ key: statesType, state: State }>) => {
+    changeStates: (state, action: PayloadAction<{ key: StateType, state: State }>) => {
       state.states[action.payload.key] = action.payload.state;
     }
   }

@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {State} from "../../types/reducer/State";
+import LoadingComponent from "../shared/LoadingComponent";
 
 const MovieComponent = () => {
 
@@ -8,16 +8,12 @@ const MovieComponent = () => {
 
   console.log(list)
 
-  if (states.getAll === State.LOADING) {
-    return <div>
-      Loading...
-    </div>
-  }
-
   return (
-    <div>
-      movies loaded
-    </div>
+    <LoadingComponent state={states.getAll}>
+      <div>
+        movies loaded
+      </div>
+    </LoadingComponent>
   )
 }
 
