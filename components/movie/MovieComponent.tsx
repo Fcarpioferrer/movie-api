@@ -39,7 +39,7 @@ const MovieComponent = () => {
     <LoadingComponent state={getAll}>
       <Carousel
         interval={10000}
-        className="h-75 mt-4"
+        className="h-75 mt-5"
         activeIndex={activeIndex}
         next={next}
         previous={previous}

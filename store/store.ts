@@ -4,13 +4,17 @@ import movieReducer from "./movie/reducer";
 import {Task} from "@redux-saga/types";
 import movieSagas from "./movie/saga";
 import logger from "redux-logger";
+import {MovieState} from "./movie/types";
 
 export interface SagaStore extends Store {
   movieTask?: Task;
 }
 
 const rootReducer = combineReducers({movieReducer});
-export type RootState = ReturnType<typeof rootReducer>;
+
+export interface RootState {
+  movieReducer: MovieState;
+}
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [...getDefaultMiddleware(), sagaMiddleware, logger];

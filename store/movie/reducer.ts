@@ -12,16 +12,16 @@ const initialState: MovieState = {
 
 const slice = createSlice({
   name: ReducerNames.MOVIES,
-  initialState,
+  initialState: initialState,
   reducers: {
-    getAll: (state) => {
+    getAll: (state: MovieState) => {
       state.states.getAll = State.LOADING;
     },
-    setAll: (state, action: PayloadAction<MovieResult[]>) => {
+    setAll: (state: MovieState, action: PayloadAction<MovieResult[]>) => {
       state.list = action.payload;
       state.states.getAll = State.FINISHED;
     },
-    changeStates: (state, action: PayloadAction<{ key: StateType, state: State }>) => {
+    changeStates: (state: MovieState, action: PayloadAction<{ key: StateType, state: State }>) => {
       state.states[action.payload.key] = action.payload.state;
     }
   }
