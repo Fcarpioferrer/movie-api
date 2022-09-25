@@ -12,8 +12,8 @@ const LoadingComponent = ({children, state}: IProps) => {
   switch (state) {
     case State.LOADING:
       return (
-        <div className="center-content h-100">
-          <Spinner/>
+        <div className="center-content h-75">
+          <Spinner color="primary"/>
         </div>
       );
 

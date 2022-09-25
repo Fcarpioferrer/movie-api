@@ -9,7 +9,7 @@ const MainLayout = (props: PropsChildren) => {
       <div className="center-content">
         <Col md={6} sm={12}>
           <FormGroup>
-            <Input className="rounded-pill" placeholder="Search..."/>
+            <Input className="rounded-pill shadow-sm" placeholder="Search..."/>
           </FormGroup>
         </Col>
       </div>
