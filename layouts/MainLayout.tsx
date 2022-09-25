@@ -5,7 +5,7 @@ import {Col, Container, FormGroup, Input} from "reactstrap";
 
 const MainLayout = (props: PropsChildren) => {
   return (
-    <Container className="vh-100 pt-5">
+    <Container className="vh-100 pt-5" fluid>
       <div className="center-content">
         <Col md={6} sm={12}>
           <FormGroup>
