@@ -1,5 +1,6 @@
 import React from "react";
 import {State} from "../../types/reducer/State";
+import {Spinner} from "reactstrap";
 
 interface IProps {
   children: React.ReactElement;
@@ -9,11 +10,10 @@ interface IProps {
 const LoadingComponent = ({children, state}: IProps) => {
 
   switch (state) {
-    case State.IDLE:
     case State.LOADING:
       return (
-        <div>
-          Loading...
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <Spinner/>
         </div>
       );
 
