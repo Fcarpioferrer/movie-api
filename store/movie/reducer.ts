@@ -6,7 +6,14 @@ import {MovieResult} from "../../types/Movie";
 
 
 const initialState: MovieState = {
-  states: new States().toJson(),
+  states: {
+    getAll: State.IDLE,
+    update: State.IDLE,
+    delete: State.IDLE,
+    get: State.IDLE,
+    create: State.IDLE,
+    other: State.IDLE,
+  },
   list: []
 }
 

@@ -21,17 +21,6 @@ export class States {
   get: State = State.IDLE;
   create: State = State.IDLE;
   other: State = State.IDLE;
-
-  toJson?: Function = () => {
-    return {
-      getAll: State.IDLE,
-      update: State.IDLE,
-      delete: State.IDLE,
-      get: State.IDLE,
-      create: State.IDLE,
-      other: State.IDLE,
-    }
-  }
 }
 
 

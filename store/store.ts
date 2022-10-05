@@ -15,7 +15,11 @@ const sagaMiddleware = createSagaMiddleware();
 const middleware = [...getDefaultMiddleware(), sagaMiddleware, logger];
 
 const makeStore: any = () => {
-  const store = configureStore({reducer: rootReducer, middleware, devTools: Boolean(process.env.REACT_APP_DEV_TOOLS)});
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware,
+    devTools: Boolean(process.env.REACT_APP_DEV_TOOLS)
+  });
   sagaMiddleware.run(movieSagas);
   return store;
 
